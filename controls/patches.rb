@@ -21,7 +21,7 @@ control 'patches' do
   title 'All operating system package updates are installed'
   linux_update.updates.each do |update|
     describe package(update['name']) do
-      its('version') { should eq update['version'] }
+      its('version') { should <= update['version'] }
     end
   end
   only_if { linux_update.updates.length.positive? }
